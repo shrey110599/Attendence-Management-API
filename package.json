@@ -22,5 +22,13 @@
   "devDependencies": {
     "nodemon": "^3.1.9"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shrey110599/Attendence-Management-API.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shrey110599/Attendence-Management-API/issues"
+  },
+  "homepage": "https://github.com/shrey110599/Attendence-Management-API#readme",
   "description": ""
 }

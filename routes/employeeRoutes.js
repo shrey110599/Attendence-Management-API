@@ -11,5 +11,4 @@ router.get('/:id', getEmployeeById);
 router.put('/:id', protect, updateEmployee);
 router.delete('/:id', protect, deleteEmployee);
 
-module.exports = router;
-    
+module.exports = router;    

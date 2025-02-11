@@ -97,3 +97,35 @@ exports.getPresentEmployees = async (req, res) => {
     }
   };
   
+
+  exports.getEmployeeAttendanceDetails = async (req, res) => {
+    try {
+      const { employeeId } = req.params;
+      if (!employeeId) {
+        return res.status(400).json({ message: "Employee ID is required" });
+      }
+
+      // Fetch all attendance records of the given employee
+      const attendanceRecords = await Attendance.find({ employee: employeeId })
+        .populate({
+          path: "employee",
+          select: "firstName lastName email phoneNo Designation Department",
+          populate: {
+            path: "Department",
+            select: "name description",
+          },
+        })
+        .select("date checkInTime checkOutTime");
+
+      if (!attendanceRecords.length) {
+        return res
+          .status(404)
+          .json({ message: "No attendance records found for this employee" });
+      }
+
+      res.json(attendanceRecords);
+    } catch (error) {
+      console.error("Error fetching attendance details", error);
+      res.status(500).json({ message: "Server error" });
+    }
+  };

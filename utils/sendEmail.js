@@ -17,6 +17,9 @@ const sendEmail = async (to, subject, otp) => {
     // HTML Email Content
     const emailHtml = `
         <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="https://aark.co.in/assets/img/logo/aark_logo-blue.png" alt="Aark Infosoft Logo" style="max-width: 200px;">
+            </div>
             <h2 style="color: #0056b3; text-align: left;">Aark Infosoft - Password Reset Request</h2>
             <p>Dear User,</p>
             <p>We received a request to reset your password. Use the OTP below to proceed with resetting your password:</p>

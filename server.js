@@ -12,6 +12,8 @@
   const reminderRoutes = require("./routes/reminderRoutes");
   const projectRoutes = require("./routes/projectRoutes"); // NEW
   const leaveRoutes = require("./routes/leaveRoutes");
+  const taskRoutes = require("./routes/taskRoutes");
+
   
   dotenv.config();
   connectDB();
@@ -19,7 +21,7 @@
   const app = express();
   app.use(express.json());
   app.use(cors());
-
+  
   app.use("/auth", authRoutes);
   app.use("/departments", departmentRoutes);
   app.use("/employees", employeeRoutes);
@@ -29,6 +31,8 @@
   app.use("/reminders", reminderRoutes);
   app.use("/projects", projectRoutes); // NEW
   app.use("/leaves", leaveRoutes);
+  app.use("/tasks", taskRoutes);
+
 
   app.get("/", (req, res) => {
     res.send("API is running...");

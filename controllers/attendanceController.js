@@ -129,3 +129,65 @@ exports.getPresentEmployees = async (req, res) => {
       res.status(500).json({ message: "Server error" });
     }
   };
+
+  exports.getCheckoutEmployees = async (req, res) => {
+    try {
+        const today = getToday();
+
+        // Get employees who have checked in but not checked out
+        const checkoutList = await Attendance.find({ date: today, checkOutTime: null })
+            .populate({
+                path: "employee",
+                select: "firstName lastName email phoneNo Designation Department",
+                populate: {
+                    path: "Department",
+                    select: "name description",
+                },
+            })
+            .select("employee checkInTime");
+
+        res.json(checkoutList);
+    } catch (error) {
+        console.error("Error fetching checkout list", error);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+// Checkout an employee
+exports.checkoutEmployee = async (req, res) => {
+  try {
+      const { employeeId } = req.body;
+      if (!employeeId) {
+          return res.status(400).json({ message: "Employee ID is required" });
+      }
+      const today = getToday();
+
+      // Find attendance record for today where the employee hasn't checked out yet
+      const attendanceRecord = await Attendance.findOne({
+        employee: employeeId,
+        date: today,
+        checkOutTime: null, // Ensure they haven't checked out yet
+      });
+
+      if (!attendanceRecord) {
+          return res.status(404).json({ message: "Employee not found in checkout list" });
+      }
+
+      // Update checkout time with current timestamp
+      attendanceRecord.checkOutTime = new Date();
+      await attendanceRecord.save();
+
+      res.status(200).json({
+        message: "Checkout successful",
+        attendance: {
+          employee: attendanceRecord.employee,
+          date: attendanceRecord.date,
+          checkInTime: attendanceRecord.checkInTime,
+          checkOutTime: attendanceRecord.checkOutTime, // Shows exact checkout time
+        },
+      });
+  } catch (error) {
+      console.error("Error during checkout", error);
+      res.status(500).json({ message: "Server error" });
+  }
+};

@@ -20,11 +20,16 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // If password is null, don't hash it
+    let hashedPassword = null;
+    if (password) {
+      hashedPassword = await bcrypt.hash(password, 10);
+    }
+
     const user = await User.create({
       name,
       email,
-      password: hashedPassword,
+      password: hashedPassword, // Store as null if no password provided
       role,
     });
 
@@ -46,6 +51,7 @@ const registerUser = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
 
 // Login User with Activity Logging
 const loginUser = async (req, res) => {

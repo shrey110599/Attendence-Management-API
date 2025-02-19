@@ -5,25 +5,30 @@ const {
   getAvailableEmployees,
   getPresentEmployees,
   getEmployeeAttendanceDetails,
-  getCheckoutEmployees,  // New: Get employees eligible for checkout
-  checkoutEmployee       // New: Checkout an employee
+  getCheckoutEmployees,
+  checkoutEmployee,
+  getAbsentEmployees,
 } = require("../controllers/attendanceController");
 
-// Route to get employees who have NOT marked attendance today
+// ✅ Get employees who have NOT marked attendance today
 router.get('/employees', getAvailableEmployees);
 
-// Route to mark attendance for an employee
+// ✅ Mark attendance (Check-in)
 router.post('/mark', markAttendance);
 
-// Route to get details of employees who have marked attendance today
+// ✅ Get employees who have checked in today
 router.get('/present', getPresentEmployees);
 
-// Route to get employees eligible for checkout
+// ✅ Get employees eligible for checkout
 router.get('/checkout-list', getCheckoutEmployees);
 
-// Route to checkout an employee
+// ✅ Checkout an employee
 router.post("/checkout", checkoutEmployee);
 
+// ✅ Get employees who are absent today
+router.get("/absent", getAbsentEmployees);
+
+// ✅ Get attendance details of a specific employee
 router.get("/details/:employeeId", getEmployeeAttendanceDetails);
 
 module.exports = router;

@@ -41,3 +41,4 @@ const sendEmail = async (to, subject, otp) => {
 };
 
 module.exports = sendEmail;
+  

@@ -32,3 +32,5 @@ router.get("/absent", getAbsentEmployees);
 router.get("/details/:employeeId", getEmployeeAttendanceDetails);
 
 module.exports = router;
+// Compare this snippet from controllers/attendanceController.js:
+// // controllers/attendanceController.js 

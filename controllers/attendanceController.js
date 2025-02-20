@@ -157,8 +157,6 @@ exports.getCheckoutEmployees = async (req, res) => {
   }
 };
 
-
-
 // ✅ Checkout an employee and update status 
 exports.checkoutEmployee = async (req, res) => {
   try {
@@ -198,6 +196,7 @@ exports.checkoutEmployee = async (req, res) => {
 
     res.status(200).json({
       message: "Checkout successful",
+      checkoutCompleted: true, // ✅ Unique flag to hide button in frontend
       attendance: {
         employee: attendanceRecord.employee,
         date: attendanceRecord.date,
@@ -212,6 +211,7 @@ exports.checkoutEmployee = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
 
 // ✅ Get employees who have NOT checked in today (Absent Employees)
 exports.getAbsentEmployees = async (req, res) => {

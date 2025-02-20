@@ -26,9 +26,14 @@ const app = express();
 const server = createServer(app);
 
 // ✅ Fix CORS for WebSockets
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://aarkinfosoft.netlify.app",
+];
+
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // ✅ Allow frontend
+    origin: allowedOrigins, // ✅ Allow both frontend URLs
     methods: ["GET", "POST"],
     credentials: true, // ✅ Allow cookies/auth headers
   },
@@ -37,11 +42,12 @@ const io = new Server(server, {
 // ✅ Fix CORS for API requests
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: allowedOrigins, // ✅ Allow both frontend URLs
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+
 
 app.use(express.json());
 

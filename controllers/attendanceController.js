@@ -160,14 +160,31 @@ exports.getCheckoutEmployees = async (req, res) => {
 // ✅ Checkout an employee and update status 
 exports.checkoutEmployee = async (req, res) => {
   try {
+    console.log("📢 Checkout request received:", req.body); // Debug log
+
     const { employeeId } = req.body;
+
     if (!employeeId) {
+      console.error("❌ Error: Employee ID is missing");
       return res.status(400).json({ message: "Employee ID is required" });
     }
 
-    const today = getToday();
+    // ✅ Validate employeeId format (MongoDB ObjectID check)
+    if (!employeeId.match(/^[0-9a-fA-F]{24}$/)) {
+      console.error("❌ Error: Invalid Employee ID format");
+      return res.status(400).json({ message: "Invalid Employee ID format" });
+    }
 
-    // Find today's attendance record where checkOutTime is null
+    // ✅ Ensure `getToday()` is working
+    const today = getToday();
+    if (!today) {
+      console.error("❌ Error: getToday() function failed");
+      return res.status(500).json({ message: "Server error: Invalid date function" });
+    }
+
+    console.log("🔍 Searching for attendance record...");
+
+    // ✅ Find today's attendance record
     const attendanceRecord = await Attendance.findOne({
       employee: employeeId,
       date: today,
@@ -175,42 +192,67 @@ exports.checkoutEmployee = async (req, res) => {
     });
 
     if (!attendanceRecord) {
-      return res
-        .status(404)
-        .json({ message: "Employee not found in checkout list" });
+      console.warn("⚠️ Warning: Employee not found in checkout list");
+      return res.status(404).json({
+        message: "Employee not found in checkout list or already checked out",
+      });
     }
 
-    // ✅ Update checkOutTime to the current time
+    console.log("✅ Attendance record found:", attendanceRecord);
+
+    if (!attendanceRecord.checkInTime) {
+      console.error("❌ Error: Check-in time is missing");
+      return res.status(400).json({
+        message: "Check-in time is missing, cannot process checkout",
+      });
+    }
+
+    // ✅ Set checkOutTime to current time
     attendanceRecord.checkOutTime = new Date();
 
     // ✅ Calculate working hours
     const checkIn = new Date(attendanceRecord.checkInTime);
     const checkOut = new Date(attendanceRecord.checkOutTime);
-    const workingHours = (checkOut - checkIn) / (1000 * 60 * 60); // Convert ms to hours
+    const workingHours = ((checkOut - checkIn) / (1000 * 60 * 60)).toFixed(2); // Convert ms to hours
+
+    // ✅ Ensure workingHours is a valid number
+    if (isNaN(workingHours)) {
+      console.error("❌ Error: Working hours calculation failed");
+      return res.status(500).json({ message: "Server error: Invalid working hours calculation" });
+    }
+
+    attendanceRecord.workingHours = `${workingHours} hours`;
 
     // ✅ Update status based on working hours
-    attendanceRecord.status =
-      workingHours < 9 ? "Present + Half Day" : "Present";
+    attendanceRecord.status = workingHours < 9 ? "Present + Half Day" : "Present";
 
+    console.log("💾 Saving updated attendance record...");
     await attendanceRecord.save();
+    console.log("✅ Checkout successful, data saved.");
 
+    // ✅ Return response with updated attendance details
     res.status(200).json({
       message: "Checkout successful",
-      checkoutCompleted: true, // ✅ Unique flag to hide button in frontend
+      checkoutCompleted: true,
       attendance: {
         employee: attendanceRecord.employee,
         date: attendanceRecord.date,
         checkInTime: attendanceRecord.checkInTime,
-        checkOutTime: attendanceRecord.checkOutTime, // Updated checkout time
-        status: attendanceRecord.status, // Updated status
-        workingHours: workingHours.toFixed(2) + " hours", // Include calculated hours
+        checkOutTime: attendanceRecord.checkOutTime,
+        status: attendanceRecord.status,
+        workingHours: attendanceRecord.workingHours,
       },
     });
   } catch (error) {
-    console.error("Error during checkout", error);
-    res.status(500).json({ message: "Server error" });
+    console.error("🚨 Server Error during checkout:", error);
+
+    res.status(500).json({
+      message: "Server error: Unable to complete checkout",
+      error: error.message,
+    });
   }
 };
+
 
 
 // ✅ Get employees who have NOT checked in today (Absent Employees)

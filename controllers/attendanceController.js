@@ -224,7 +224,7 @@ exports.checkoutEmployee = async (req, res) => {
     attendanceRecord.workingHours = `${workingHours} hours`;
 
     // ✅ Update status based on working hours
-    attendanceRecord.status = workingHours < 9 ? "Present + Half Day" : "Present";
+    attendanceRecord.status = workingHours < 9 ? "Half Day" : "Present";
 
     console.log("💾 Saving updated attendance record...");
     await attendanceRecord.save();

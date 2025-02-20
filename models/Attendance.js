@@ -20,7 +20,7 @@ const AttendanceSchema = new mongoose.Schema(
       type: Date,
       default: null, // Initially null, updated when employee checks out
     },
-    status: { type: String, enum: ["Present", "Absent"], default: "Absent" },
+    status: { type: String, enum: ["Present", "Absent","Half Day"], default: "Absent" },
   },
   { timestamps: true } // Adds createdAt and updatedAt timestamps automatically
 );

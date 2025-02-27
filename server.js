@@ -17,6 +17,8 @@ const projectRoutes = require("./routes/projectRoutes");
 const leaveRoutes = require("./routes/leaveRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 const chatRoutes = require("./routes/chatRoutes");
+const downloadRoutes = require("./routes/downloadRoutes");
+
 
 dotenv.config();
 connectDB();
@@ -48,7 +50,6 @@ app.use(
   })
 );
 
-
 app.use(express.json());
 
 // Use Routes
@@ -63,6 +64,8 @@ app.use("/projects", projectRoutes);
 app.use("/leaves", leaveRoutes);
 app.use("/tasks", taskRoutes);
 app.use("/chat", chatRoutes);
+app.use("/download", downloadRoutes);
+
 
 app.get("/", (req, res) => {
   res.send("API is running...");

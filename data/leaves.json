@@ -1,0 +1,24 @@
+[
+  {
+    "_id": "67ac2cb81367405023e97ff9",
+    "employeeId": "67a5b20499c73f73e7deb424",
+    "startDate": "2025-02-13T00:00:00.000Z",
+    "endDate": "2025-02-14T00:00:00.000Z",
+    "reason": "I need to take care of some urgent personal work that requires my presence.",
+    "status": "Approved",
+    "createdAt": "2025-02-12T05:08:08.352Z",
+    "updatedAt": "2025-02-13T09:45:59.257Z",
+    "__v": 0
+  },
+  {
+    "_id": "67adbf2689a135640c38810c",
+    "employeeId": "67a5b20499c73f73e7deb424",
+    "startDate": "2025-02-15T00:00:00.000Z",
+    "endDate": "2025-02-20T00:00:00.000Z",
+    "reason": "For My Personal Reason",
+    "status": "Rejected",
+    "createdAt": "2025-02-13T09:45:10.203Z",
+    "updatedAt": "2025-02-13T09:45:41.458Z",
+    "__v": 0
+  }
+]

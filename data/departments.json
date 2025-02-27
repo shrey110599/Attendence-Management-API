@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "67a49dedcda37a2041135020",
+    "name": "Development",
+    "description": "Development",
+    "createdAt": "2025-02-06T11:33:01.507Z",
+    "updatedAt": "2025-02-07T06:38:42.171Z",
+    "__v": 0
+  },
+  {
+    "_id": "67a4a673e0fbf4d8066b04a5",
+    "name": "Account Department ",
+    "description": "Account Department ",
+    "createdAt": "2025-02-06T12:09:23.043Z",
+    "updatedAt": "2025-02-06T12:09:23.043Z",
+    "__v": 0
+  },
+  {
+    "_id": "67a4a859e0fbf4d8066b051c",
+    "name": "Admin Department",
+    "description": "Admin Department",
+    "createdAt": "2025-02-06T12:17:29.086Z",
+    "updatedAt": "2025-02-06T12:17:29.086Z",
+    "__v": 0
+  },
+  {
+    "_id": "67a5aa7d99c73f73e7deb20b",
+    "name": "Marketing",
+    "description": "Marketing",
+    "createdAt": "2025-02-07T06:38:53.635Z",
+    "updatedAt": "2025-02-07T06:38:53.635Z",
+    "__v": 0
+  },
+  {
+    "_id": "67a5f7de5124b8d7c80ff78a",
+    "name": "Data entry ",
+    "description": "Data entry ",
+    "createdAt": "2025-02-07T12:09:02.123Z",
+    "updatedAt": "2025-02-07T12:09:02.123Z",
+    "__v": 0
+  }
+]

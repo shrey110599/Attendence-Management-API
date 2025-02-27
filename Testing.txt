@@ -1,5 +1,0 @@
-{
-  "name": "Aark Infosft",
-  "email": "root.superadmin@aark.co.in",
-  "password": "A1#aipl@110599"
-}

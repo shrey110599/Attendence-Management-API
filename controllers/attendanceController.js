@@ -199,7 +199,7 @@ exports.checkoutEmployee = async (req, res) => {
     }
 
     console.log("✅ Attendance record found:", attendanceRecord);
-
+    
     if (!attendanceRecord.checkInTime) {
       console.error("❌ Error: Check-in time is missing");
       return res.status(400).json({

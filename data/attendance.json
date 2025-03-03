@@ -3032,10 +3032,10 @@
     "employee": "67a5cbbc9a860770f0cf9ad5",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T03:55:51.369Z",
-    "checkOutTime": null,
+    "checkOutTime": "2025-02-27T13:30:44.588Z",
     "status": "Present",
     "createdAt": "2025-02-27T03:55:51.370Z",
-    "updatedAt": "2025-02-27T03:55:51.370Z",
+    "updatedAt": "2025-02-27T13:30:44.589Z",
     "__v": 0
   },
   {
@@ -3043,10 +3043,10 @@
     "employee": "67a5b20499c73f73e7deb424",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T05:08:55.868Z",
-    "checkOutTime": null,
-    "status": "Present",
+    "checkOutTime": "2025-02-27T13:53:49.564Z",
+    "status": "Half Day",
     "createdAt": "2025-02-27T05:08:55.874Z",
-    "updatedAt": "2025-02-27T05:08:55.874Z",
+    "updatedAt": "2025-02-27T13:53:49.565Z",
     "__v": 0
   },
   {
@@ -3054,10 +3054,10 @@
     "employee": "67a5b57699c73f73e7deb51c",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T05:09:02.281Z",
-    "checkOutTime": null,
-    "status": "Present",
+    "checkOutTime": "2025-02-27T13:30:22.811Z",
+    "status": "Half Day",
     "createdAt": "2025-02-27T05:09:02.281Z",
-    "updatedAt": "2025-02-27T05:09:02.281Z",
+    "updatedAt": "2025-02-27T13:30:22.812Z",
     "__v": 0
   },
   {
@@ -3065,10 +3065,10 @@
     "employee": "67a5b64399c73f73e7deb546",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T05:09:07.051Z",
-    "checkOutTime": null,
-    "status": "Present",
+    "checkOutTime": "2025-02-27T13:30:15.799Z",
+    "status": "Half Day",
     "createdAt": "2025-02-27T05:09:07.052Z",
-    "updatedAt": "2025-02-27T05:09:07.052Z",
+    "updatedAt": "2025-02-27T13:30:15.804Z",
     "__v": 0
   },
   {
@@ -3076,10 +3076,10 @@
     "employee": "67a5cd279a860770f0cf9b79",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T05:09:11.268Z",
-    "checkOutTime": null,
-    "status": "Present",
+    "checkOutTime": "2025-02-27T13:31:52.007Z",
+    "status": "Half Day",
     "createdAt": "2025-02-27T05:09:11.269Z",
-    "updatedAt": "2025-02-27T05:09:11.269Z",
+    "updatedAt": "2025-02-27T13:31:52.007Z",
     "__v": 0
   },
   {
@@ -3087,10 +3087,10 @@
     "employee": "67a5cd759a860770f0cf9b97",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T05:09:14.969Z",
-    "checkOutTime": null,
-    "status": "Present",
+    "checkOutTime": "2025-02-27T13:31:46.625Z",
+    "status": "Half Day",
     "createdAt": "2025-02-27T05:09:14.970Z",
-    "updatedAt": "2025-02-27T05:09:14.970Z",
+    "updatedAt": "2025-02-27T13:31:46.625Z",
     "__v": 0
   },
   {
@@ -3098,10 +3098,10 @@
     "employee": "67a5cef39a860770f0cf9bef",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T05:09:21.053Z",
-    "checkOutTime": null,
-    "status": "Present",
+    "checkOutTime": "2025-02-27T13:30:29.825Z",
+    "status": "Half Day",
     "createdAt": "2025-02-27T05:09:21.054Z",
-    "updatedAt": "2025-02-27T05:09:21.054Z",
+    "updatedAt": "2025-02-27T13:30:29.826Z",
     "__v": 0
   },
   {
@@ -3109,10 +3109,10 @@
     "employee": "67a5cfcc9a860770f0cf9bf7",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T05:09:24.844Z",
-    "checkOutTime": null,
-    "status": "Present",
+    "checkOutTime": "2025-02-27T13:30:32.534Z",
+    "status": "Half Day",
     "createdAt": "2025-02-27T05:09:24.844Z",
-    "updatedAt": "2025-02-27T05:09:24.844Z",
+    "updatedAt": "2025-02-27T13:30:32.538Z",
     "__v": 0
   },
   {
@@ -3120,10 +3120,10 @@
     "employee": "67a5d1349a860770f0cf9c63",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T05:09:29.354Z",
-    "checkOutTime": null,
-    "status": "Present",
+    "checkOutTime": "2025-02-27T13:32:27.863Z",
+    "status": "Half Day",
     "createdAt": "2025-02-27T05:09:29.354Z",
-    "updatedAt": "2025-02-27T05:09:29.354Z",
+    "updatedAt": "2025-02-27T13:32:27.863Z",
     "__v": 0
   },
   {
@@ -3131,10 +3131,10 @@
     "employee": "67a5d6329a860770f0cf9d30",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T05:09:36.808Z",
-    "checkOutTime": null,
-    "status": "Present",
+    "checkOutTime": "2025-02-27T13:31:55.504Z",
+    "status": "Half Day",
     "createdAt": "2025-02-27T05:09:36.808Z",
-    "updatedAt": "2025-02-27T05:09:36.808Z",
+    "updatedAt": "2025-02-27T13:31:55.504Z",
     "__v": 0
   },
   {
@@ -3142,10 +3142,10 @@
     "employee": "67a5d5e09a860770f0cf9d23",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T05:09:41.176Z",
-    "checkOutTime": null,
-    "status": "Present",
+    "checkOutTime": "2025-02-27T13:31:49.656Z",
+    "status": "Half Day",
     "createdAt": "2025-02-27T05:09:41.177Z",
-    "updatedAt": "2025-02-27T05:09:41.177Z",
+    "updatedAt": "2025-02-27T13:31:49.656Z",
     "__v": 0
   },
   {
@@ -3208,10 +3208,10 @@
     "employee": "67ab35f0b770cc7919a85bbb",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T05:10:05.842Z",
-    "checkOutTime": null,
-    "status": "Present",
+    "checkOutTime": "2025-02-27T13:31:00.613Z",
+    "status": "Half Day",
     "createdAt": "2025-02-27T05:10:05.843Z",
-    "updatedAt": "2025-02-27T05:10:05.843Z",
+    "updatedAt": "2025-02-27T13:31:00.614Z",
     "__v": 0
   },
   {
@@ -3230,10 +3230,10 @@
     "employee": "67b562994d7774c5d77e848e",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T05:10:15.811Z",
-    "checkOutTime": null,
-    "status": "Present",
+    "checkOutTime": "2025-02-27T13:32:29.322Z",
+    "status": "Half Day",
     "createdAt": "2025-02-27T05:10:15.811Z",
-    "updatedAt": "2025-02-27T05:10:15.811Z",
+    "updatedAt": "2025-02-27T13:32:29.322Z",
     "__v": 0
   },
   {
@@ -3252,10 +3252,10 @@
     "employee": "67b561ac4d7774c5d77e83f8",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T05:10:40.438Z",
-    "checkOutTime": null,
-    "status": "Present",
+    "checkOutTime": "2025-02-27T13:35:55.020Z",
+    "status": "Half Day",
     "createdAt": "2025-02-27T05:10:40.438Z",
-    "updatedAt": "2025-02-27T05:10:40.438Z",
+    "updatedAt": "2025-02-27T13:35:55.020Z",
     "__v": 0
   },
   {
@@ -3263,10 +3263,10 @@
     "employee": "67a5d6989a860770f0cf9d45",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T05:10:46.484Z",
-    "checkOutTime": null,
-    "status": "Present",
+    "checkOutTime": "2025-02-27T13:32:02.795Z",
+    "status": "Half Day",
     "createdAt": "2025-02-27T05:10:46.485Z",
-    "updatedAt": "2025-02-27T05:10:46.485Z",
+    "updatedAt": "2025-02-27T13:32:02.796Z",
     "__v": 0
   },
   {
@@ -3274,10 +3274,10 @@
     "employee": "67a5ccb49a860770f0cf9b69",
     "date": "2025-02-27T00:00:00.000Z",
     "checkInTime": "2025-02-27T05:10:58.014Z",
-    "checkOutTime": null,
-    "status": "Present",
+    "checkOutTime": "2025-02-27T13:34:20.386Z",
+    "status": "Half Day",
     "createdAt": "2025-02-27T05:10:58.014Z",
-    "updatedAt": "2025-02-27T05:10:58.014Z",
+    "updatedAt": "2025-02-27T13:34:20.387Z",
     "__v": 0
   },
   {
@@ -3333,6 +3333,292 @@
     "status": "Present",
     "createdAt": "2025-02-27T06:33:50.168Z",
     "updatedAt": "2025-02-27T06:33:50.168Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13a6cb2eed3cd3593d71d",
+    "employee": "67a5b57699c73f73e7deb51c",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:24:12.488Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:24:12.490Z",
+    "updatedAt": "2025-02-28T04:24:12.490Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13b6bb2eed3cd3593d785",
+    "employee": "67a5d6329a860770f0cf9d30",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:28:27.595Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:28:27.595Z",
+    "updatedAt": "2025-02-28T04:28:27.595Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13b6bb2eed3cd3593d787",
+    "employee": "67b562184d7774c5d77e841f",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:28:27.643Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:28:27.644Z",
+    "updatedAt": "2025-02-28T04:28:27.644Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13b6fb2eed3cd3593d790",
+    "employee": "67a5d6989a860770f0cf9d45",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:28:31.756Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:28:31.757Z",
+    "updatedAt": "2025-02-28T04:28:31.757Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13b7eb2eed3cd3593d7bb",
+    "employee": "67a5d1349a860770f0cf9c63",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:28:46.848Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:28:46.849Z",
+    "updatedAt": "2025-02-28T04:28:46.849Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13bf5b2eed3cd3593d836",
+    "employee": "67a5cd759a860770f0cf9b97",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:30:45.090Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:30:45.091Z",
+    "updatedAt": "2025-02-28T04:30:45.091Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13c0ab2eed3cd3593d855",
+    "employee": "67a5cd279a860770f0cf9b79",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:31:06.163Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:31:06.164Z",
+    "updatedAt": "2025-02-28T04:31:06.164Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13c0bb2eed3cd3593d85b",
+    "employee": "67a5cfcc9a860770f0cf9bf7",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:31:07.188Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:31:07.189Z",
+    "updatedAt": "2025-02-28T04:31:07.189Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13c27b2eed3cd3593d8a4",
+    "employee": "67a5d5e09a860770f0cf9d23",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:31:35.697Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:31:35.698Z",
+    "updatedAt": "2025-02-28T04:31:35.698Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13c6ab2eed3cd3593d8e4",
+    "employee": "67ab35f0b770cc7919a85bbb",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:32:42.968Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:32:42.969Z",
+    "updatedAt": "2025-02-28T04:32:42.969Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13cb5b2eed3cd3593d917",
+    "employee": "67a5b64399c73f73e7deb546",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:33:57.782Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:33:57.782Z",
+    "updatedAt": "2025-02-28T04:33:57.782Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13ccdb2eed3cd3593d94c",
+    "employee": "67a5cbbc9a860770f0cf9ad5",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:34:21.300Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:34:21.301Z",
+    "updatedAt": "2025-02-28T04:34:21.301Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13cceb2eed3cd3593d952",
+    "employee": "67a5cef39a860770f0cf9bef",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:34:22.280Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:34:22.280Z",
+    "updatedAt": "2025-02-28T04:34:22.280Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13cdeb2eed3cd3593d973",
+    "employee": "67a5ccb49a860770f0cf9b69",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:34:38.870Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:34:38.871Z",
+    "updatedAt": "2025-02-28T04:34:38.871Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13eeab2eed3cd3593d9c6",
+    "employee": "67a5b4ec99c73f73e7deb514",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:43:22.638Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:43:22.639Z",
+    "updatedAt": "2025-02-28T04:43:22.639Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13eecb2eed3cd3593d9cc",
+    "employee": "67a5b49099c73f73e7deb50c",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:43:24.754Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:43:24.754Z",
+    "updatedAt": "2025-02-28T04:43:24.754Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13eeeb2eed3cd3593d9d0",
+    "employee": "67a5b3e399c73f73e7deb4af",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:43:26.344Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:43:26.345Z",
+    "updatedAt": "2025-02-28T04:43:26.345Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13ef1b2eed3cd3593d9d8",
+    "employee": "67a5b20499c73f73e7deb424",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:43:29.275Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:43:29.275Z",
+    "updatedAt": "2025-02-28T04:43:29.275Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13ef6b2eed3cd3593d9de",
+    "employee": "67a5fb055124b8d7c80ff7e1",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:43:34.255Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:43:34.255Z",
+    "updatedAt": "2025-02-28T04:43:34.255Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13ef8b2eed3cd3593d9e4",
+    "employee": "67a5faba5124b8d7c80ff7d9",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:43:36.606Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:43:36.607Z",
+    "updatedAt": "2025-02-28T04:43:36.607Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13f00b2eed3cd3593d9ea",
+    "employee": "67b560424d7774c5d77e83b1",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:43:44.586Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:43:44.587Z",
+    "updatedAt": "2025-02-28T04:43:44.587Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13f05b2eed3cd3593d9f0",
+    "employee": "67a5da719a860770f0cf9d8e",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:43:49.028Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:43:49.029Z",
+    "updatedAt": "2025-02-28T04:43:49.029Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c13f2cb2eed3cd3593d9f9",
+    "employee": "67b561ac4d7774c5d77e83f8",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:44:28.520Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:44:28.521Z",
+    "updatedAt": "2025-02-28T04:44:28.521Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c140aeb2eed3cd3593da2e",
+    "employee": "67a5f7145124b8d7c80ff766",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:50:54.503Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:50:54.504Z",
+    "updatedAt": "2025-02-28T04:50:54.504Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c140ffb2eed3cd3593da49",
+    "employee": "67b562994d7774c5d77e848e",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:52:15.998Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:52:15.999Z",
+    "updatedAt": "2025-02-28T04:52:15.999Z",
+    "__v": 0
+  },
+  {
+    "_id": "67c141d0b2eed3cd3593da6b",
+    "employee": "67a5dad89a860770f0cf9da8",
+    "date": "2025-02-28T00:00:00.000Z",
+    "checkInTime": "2025-02-28T04:55:44.933Z",
+    "checkOutTime": null,
+    "status": "Present",
+    "createdAt": "2025-02-28T04:55:44.934Z",
+    "updatedAt": "2025-02-28T04:55:44.934Z",
     "__v": 0
   }
 ]

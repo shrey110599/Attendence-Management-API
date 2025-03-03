@@ -61,7 +61,9 @@ router.get("/download-data", async (req, res) => {
     });
   } catch (error) {
     console.error("🚨 Error exporting data:", error.message, error.stack);
-    res.status(500).json({ error: "Internal Server Error", details: error.message });
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", details: error.message });
   }
 });
 

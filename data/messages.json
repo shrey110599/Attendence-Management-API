@@ -250,5 +250,14 @@
     "createdAt": "2025-02-27T06:20:55.877Z",
     "updatedAt": "2025-02-27T06:20:55.877Z",
     "__v": 0
+  },
+  {
+    "_id": "67c036b0ad410239b206ff9b",
+    "sender": "67a5b57699c73f73e7deb51c",
+    "receiver": "67a5b64399c73f73e7deb546",
+    "message": "hello",
+    "createdAt": "2025-02-27T09:56:00.162Z",
+    "updatedAt": "2025-02-27T09:56:00.162Z",
+    "__v": 0
   }
 ]

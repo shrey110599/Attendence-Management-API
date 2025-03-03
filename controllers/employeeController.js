@@ -1,6 +1,7 @@
 const Employee = require("../models/Employee");
 const Department = require("../models/Department"); // ✅ Correct import
 const mongoose = require("mongoose");
+const moment = require("moment");
 // Create a new employee
 const createEmployee = async (req, res) => {
   try {
@@ -144,6 +145,48 @@ const deleteEmployee = async (req, res) => {
   }
 };
 
+const getUpcomingBirthdays = async (req, res) => {
+  try {
+    const today = moment(); // Get current date
+    const currentMonth = today.month() + 1; // Get current month (1-12)
+
+    const employees = await Employee.find();
+
+    // Filter employees whose birthdays fall within the current month
+    const upcomingBirthdays = employees
+      .map((employee) => {
+        if (!employee.dateOfBirth) return null; // Skip employees without DOB
+
+        const birthDate = moment(employee.dateOfBirth, "YYYY-MM-DD");
+        const birthMonth = birthDate.month() + 1; // Get birth month
+        const birthDay = birthDate.date(); // Get birth day
+
+        if (birthMonth === currentMonth) {
+          const birthdayThisYear = moment(
+            `${today.year()}-${birthMonth}-${birthDay}`,
+            "YYYY-MM-DD"
+          );
+          const remainingDays = birthdayThisYear.diff(today, "days"); // Calculate days left
+
+          return {
+            ...employee._doc, // Spread existing employee data
+            remainingDays, // Add remaining days
+          };
+        }
+        return null;
+      })
+      .filter((employee) => employee !== null); // Remove null values
+
+    // Sort employees by closest upcoming birthday
+    upcomingBirthdays.sort((a, b) => a.remainingDays - b.remainingDays);
+
+    res.json(upcomingBirthdays);
+  } catch (error) {
+    console.error("Error fetching upcoming birthdays:", error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
 
 module.exports = {
   createEmployee,
@@ -151,4 +194,5 @@ module.exports = {
   getEmployeeById,
   updateEmployee,
   deleteEmployee,
+  getUpcomingBirthdays 
 };

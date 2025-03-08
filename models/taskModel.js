@@ -7,9 +7,8 @@ const TaskSchema = new mongoose.Schema(
     assignedTo: { type: mongoose.Schema.Types.ObjectId, ref: "Employee", required: true },
     project: { type: mongoose.Schema.Types.ObjectId, ref: "Project", required: true }, 
     status: { type: String, enum: ["Pending", "In Progress", "Completed"], default: "Pending" },
-    priority: { type: String, enum: ["High", "Medium", "Low"], required: true, default: "Medium" }, // 🆕 Added Priority Field
     dueDate: { type: Date, required: true },
-    expectedHours: { type: Number, required: true },
+    expectedHours: { type: Number, required: true }, // 🆕 New Field
   },
   { timestamps: true }
 );

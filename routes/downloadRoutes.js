@@ -54,16 +54,14 @@ router.get("/download-data", async (req, res) => {
     output.on("close", () => {
       res.setHeader(
         "Content-Disposition",
-        `attachment; filename="${zipFileName}"` 
+        `attachment; filename="${zipFileName}"`
       );
       res.setHeader("Content-Type", "application/zip");
       res.sendFile(zipFilePath);
     });
   } catch (error) {
     console.error("🚨 Error exporting data:", error.message, error.stack);
-    res
-      .status(500)
-      .json({ error: "Internal Server Error", details: error.message });
+    res.status(500).json({ error: "Internal Server Error", details: error.message });
   }
 });
 

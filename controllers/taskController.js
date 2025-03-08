@@ -4,27 +4,13 @@ const Project = require("../models/Project");
 // Create Task
 exports.createTask = async (req, res) => {
   try {
-    const {
-      title,
-      description,
-      assignedTo,
-      project,
-      dueDate,
-      expectedHours,
-      priority,
-    } = req.body;
+    const { title, description, assignedTo, project, dueDate, expectedHours } =
+      req.body;
 
     if (!expectedHours || expectedHours <= 0) {
       return res
         .status(400)
         .json({ message: "Expected hours must be greater than 0." });
-    }
-
-    // Validate priority field
-    if (!["High", "Medium", "Low"].includes(priority)) {
-      return res
-        .status(400)
-        .json({ message: "Priority must be High, Medium, or Low." });
     }
 
     // Validate if Project Exists
@@ -40,7 +26,6 @@ exports.createTask = async (req, res) => {
       project,
       dueDate,
       expectedHours,
-      priority,
     });
     await task.save();
     res.status(201).json(task);
@@ -49,7 +34,6 @@ exports.createTask = async (req, res) => {
   }
 };
 
-// Get All Tasks
 exports.getAllTasks = async (req, res) => {
   try {
     const tasks = await Task.find()
@@ -62,7 +46,6 @@ exports.getAllTasks = async (req, res) => {
   }
 };
 
-// Get Task by ID
 exports.getTaskById = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id)
@@ -80,17 +63,17 @@ exports.getTaskById = async (req, res) => {
 // Update Task
 exports.updateTask = async (req, res) => {
   try {
-    const { expectedHours, priority } = req.body;
+    const { expectedHours } = req.body;
 
     if (expectedHours !== undefined && expectedHours <= 0) {
-      return res.status(400).json({ message: "Expected hours must be greater than 0." });
+      return res
+        .status(400)
+        .json({ message: "Expected hours must be greater than 0." });
     }
 
-    if (priority !== undefined && !["High", "Medium", "Low"].includes(priority)) {
-      return res.status(400).json({ message: "Priority must be High, Medium, or Low." });
-    }
-
-    const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
 
     if (!task) return res.status(404).json({ message: "Task not found" });
 
@@ -111,7 +94,7 @@ exports.deleteTask = async (req, res) => {
   }
 };
 
-// Get Tasks by Employee
+
 exports.getTasksByEmployee = async (req, res) => {
   try {
     const { employeeId } = req.params;
@@ -129,26 +112,4 @@ exports.getTasksByEmployee = async (req, res) => {
     res.status(500).json({ error: "Server error", details: error.message });
   }
 };
-
-// Get Tasks by Priority
-exports.getTasksByPriority = async (req, res) => {
-  try {
-    const { priority } = req.params;
-
-    if (!["High", "Medium", "Low"].includes(priority)) {
-      return res.status(400).json({ message: "Priority must be High, Medium, or Low." });
-    }
-
-    const tasks = await Task.find({ priority })
-      .populate("assignedTo", "firstName lastName")
-      .populate("project", "name");
-
-    if (!tasks.length) {
-      return res.status(404).json({ message: `No tasks found with ${priority} priority.` });
-    }
-
-    res.status(200).json(tasks);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+  

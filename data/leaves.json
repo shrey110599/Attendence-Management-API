@@ -1,54 +1,24 @@
 [
   {
-    "employmentDetails": {
-      "employeeName": "Faizan khan",
-      "dateOfApplication": "2025-03-07T00:00:00.000Z",
-      "jobTitle": "React .JS Developer ",
-      "department": "Development",
-      "projectName": "67b2dd95fc91663efa81b62d",
-      "reportingTo": "67bd905c9569f1955252c374",
-      "postingLocation": "React .JS Developer ",
-      "postedSince": "2024-09-06T00:00:00.000Z"
-    },
-    "leaveDetails": {
-      "leaveRequested": "Personal Reason",
-      "natureOfLeave": "Casual",
-      "reasonOfLeave": "Personal Reason",
-      "fromDate": "2025-03-07T00:00:00.000Z",
-      "toDate": "2025-03-09T00:00:00.000Z",
-      "emergencyContact": true
-    },
-    "leaveAvailable": {
-      "cl": {
-        "opBal": 12,
-        "clBal": 7,
-        "add": 0,
-        "less": 5
-      },
-      "ml": {
-        "opBal": 6,
-        "clBal": 6,
-        "add": 0,
-        "less": 0
-      },
-      "pl": {
-        "opBal": 12,
-        "clBal": 8,
-        "add": 0,
-        "less": 4
-      },
-      "total": {
-        "opBal": 30,
-        "clBal": 21,
-        "add": 0,
-        "less": 9
-      }
-    },
-    "_id": "67c5401b37d636de04124ebc",
-    "employee": "67a5b20499c73f73e7deb424",
-    "year": 2025,
-    "month": 3,
-    "status": "Pending",
+    "_id": "67ac2cb81367405023e97ff9",
+    "employeeId": "67a5b20499c73f73e7deb424",
+    "startDate": "2025-02-13T00:00:00.000Z",
+    "endDate": "2025-02-14T00:00:00.000Z",
+    "reason": "I need to take care of some urgent personal work that requires my presence.",
+    "status": "Approved",
+    "createdAt": "2025-02-12T05:08:08.352Z",
+    "updatedAt": "2025-02-13T09:45:59.257Z",
+    "__v": 0
+  },
+  {
+    "_id": "67adbf2689a135640c38810c",
+    "employeeId": "67a5b20499c73f73e7deb424",
+    "startDate": "2025-02-15T00:00:00.000Z",
+    "endDate": "2025-02-20T00:00:00.000Z",
+    "reason": "For My Personal Reason",
+    "status": "Rejected",
+    "createdAt": "2025-02-13T09:45:10.203Z",
+    "updatedAt": "2025-02-13T09:45:41.458Z",
     "__v": 0
   }
 ]

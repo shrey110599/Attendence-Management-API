@@ -1,5 +1,6 @@
 [
   {
+    "priority": "Medium",
     "_id": "67ad9108908e55dd77673126",
     "title": "Develop API Endpoints...",
     "description": "Create RESTful API for user management......",
@@ -21,9 +22,10 @@
     "status": "Completed",
     "dueDate": "2025-03-25T00:00:00.000Z",
     "createdAt": "2025-02-13T06:29:13.493Z",
-    "updatedAt": "2025-02-21T14:20:20.707Z",
+    "updatedAt": "2025-03-04T05:04:45.601Z",
     "__v": 0,
-    "expectedHours": 3
+    "expectedHours": 3,
+    "priority": "Medium"
   },
   {
     "_id": "67ad9152908e55dd77673134",
@@ -34,9 +36,10 @@
     "status": "Completed",
     "dueDate": "2025-04-15T00:00:00.000Z",
     "createdAt": "2025-02-13T06:29:38.005Z",
-    "updatedAt": "2025-02-24T08:21:41.400Z",
+    "updatedAt": "2025-03-04T04:59:56.777Z",
     "__v": 0,
-    "expectedHours": 1
+    "expectedHours": 1,
+    "priority": "Low"
   },
   {
     "_id": "67bc1ec5264eea2adca543b7",
@@ -44,12 +47,13 @@
     "description": "Make Header And Footer With Proper Responsive",
     "assignedTo": "67a5b20499c73f73e7deb424",
     "project": "67b2df5cfc91663efa81b684",
-    "status": "Completed",
+    "status": "In Progress",
     "dueDate": "2025-02-25T00:00:00.000Z",
     "expectedHours": 2,
     "createdAt": "2025-02-24T07:24:53.067Z",
-    "updatedAt": "2025-02-24T08:21:36.736Z",
-    "__v": 0
+    "updatedAt": "2025-03-04T05:00:13.361Z",
+    "__v": 0,
+    "priority": "High"
   },
   {
     "_id": "67bc1fb1264eea2adca543ea",
@@ -57,24 +61,26 @@
     "description": "User Registration & Login (Email, Social Login), Role-Based Access Control (Admin, User, Manager), Password Reset & Two-Factor Authentication, Profile Management",
     "assignedTo": "67a5b20499c73f73e7deb424",
     "project": "67b2df5cfc91663efa81b684",
-    "status": "Pending",
+    "status": "Completed",
     "dueDate": "2025-02-25T00:00:00.000Z",
     "expectedHours": 5,
     "createdAt": "2025-02-24T07:28:49.239Z",
-    "updatedAt": "2025-02-24T07:28:49.239Z",
-    "__v": 0
+    "updatedAt": "2025-03-04T05:00:04.297Z",
+    "__v": 0,
+    "priority": "High"
   },
   {
+    "priority": "Medium",
     "_id": "67bc1fdb264eea2adca54404",
     "title": "Dashboard & Analytics Module",
     "description": "User Dashboard with Personalized Data, Real-Time Analytics & Reports, Activity Logs & Notifications",
-    "assignedTo": "67a5cd279a860770f0cf9b79",
-    "project": "67b2e0b3fc91663efa81b6f4",
+    "assignedTo": "67a5b64399c73f73e7deb546",
+    "project": "67b2dd95fc91663efa81b62d",
     "status": "In Progress",
     "dueDate": "2025-02-28T00:00:00.000Z",
     "expectedHours": 6,
     "createdAt": "2025-02-24T07:29:31.716Z",
-    "updatedAt": "2025-02-24T07:31:10.826Z",
+    "updatedAt": "2025-03-03T08:30:16.469Z",
     "__v": 0
   },
   {
@@ -83,24 +89,26 @@
     "description": "Shopping Cart & Checkout System, Payment Gateway Integration (Stripe, PayPal, Razorpay), Invoice & Billing Management, Order Tracking",
     "assignedTo": "67ab35f0b770cc7919a85bbb",
     "project": "67b2de15fc91663efa81b64b",
-    "status": "Completed",
+    "status": "Pending",
     "dueDate": "2025-02-28T00:00:00.000Z",
     "expectedHours": 5,
     "createdAt": "2025-02-24T07:30:16.128Z",
-    "updatedAt": "2025-02-24T10:51:21.059Z",
-    "__v": 0
+    "updatedAt": "2025-03-04T04:49:28.978Z",
+    "__v": 0,
+    "priority": "Medium"
   },
   {
+    "priority": "Medium",
     "_id": "67bc2029264eea2adca54422",
     "title": "API & Integration Module",
     "description": "RESTful API for External Integration, Webhooks for Real-Time Updates, Third-Party Service Connections\n\nLet me know if you need any modifications! 🚀",
     "assignedTo": "67a5cd279a860770f0cf9b79",
     "project": "67b2deb8fc91663efa81b666",
-    "status": "In Progress",
+    "status": "Pending",
     "dueDate": "2025-02-28T00:00:00.000Z",
     "expectedHours": 6,
     "createdAt": "2025-02-24T07:30:49.617Z",
-    "updatedAt": "2025-02-24T11:05:55.246Z",
+    "updatedAt": "2025-03-04T04:42:13.416Z",
     "__v": 0
   }
 ]

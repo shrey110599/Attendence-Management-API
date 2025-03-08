@@ -7,10 +7,11 @@
     "members": [
       "67a5b20499c73f73e7deb424",
       "67a5cbbc9a860770f0cf9ad5",
-      "67a5cd279a860770f0cf9b79"
+      "67a5cd279a860770f0cf9b79",
+      "67a5cd759a860770f0cf9b97"
     ],
     "createdAt": "2025-02-17T06:56:21.693Z",
-    "updatedAt": "2025-02-17T07:04:28.508Z",
+    "updatedAt": "2025-03-03T12:31:46.405Z",
     "__v": 0
   },
   {
@@ -26,7 +27,7 @@
       "67b560424d7774c5d77e83b1"
     ],
     "createdAt": "2025-02-17T06:58:29.798Z",
-    "updatedAt": "2025-02-19T09:10:49.812Z",
+    "updatedAt": "2025-03-03T12:31:56.786Z",
     "__v": 0
   },
   {
@@ -74,10 +75,11 @@
     "status": "Ongoing",
     "summary": "Signs And Banner",
     "members": [
-      "67a5ccb49a860770f0cf9b69"
+      "67a5ccb49a860770f0cf9b69",
+      "67b562184d7774c5d77e841f"
     ],
     "createdAt": "2025-02-17T07:02:14.659Z",
-    "updatedAt": "2025-02-17T07:02:14.659Z",
+    "updatedAt": "2025-02-27T09:03:02.930Z",
     "__v": 0
   },
   {
@@ -102,18 +104,6 @@
     ],
     "createdAt": "2025-02-17T07:03:56.280Z",
     "updatedAt": "2025-02-17T07:03:56.280Z",
-    "__v": 0
-  },
-  {
-    "_id": "67b2df8cfc91663efa81b694",
-    "name": "Vpandit Numerlogy & Panchang Section",
-    "status": "Ongoing",
-    "summary": "Vpandit Numerlogy Section",
-    "members": [
-      "67a5cd759a860770f0cf9b97"
-    ],
-    "createdAt": "2025-02-17T07:04:44.811Z",
-    "updatedAt": "2025-02-17T07:07:19.309Z",
     "__v": 0
   },
   {

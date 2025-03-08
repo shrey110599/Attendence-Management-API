@@ -38,12 +38,17 @@ exports.getAvailableEmployees = async (req, res) => {
 exports.markAttendance = async (req, res) => {
   try {
     const { employeeId } = req.body;
-    if (!employeeId) return res.status(400).json({ message: "Employee ID is required" });
+    if (!employeeId)
+      return res.status(400).json({ message: "Employee ID is required" });
 
     const today = getToday();
 
-    const existingAttendance = await Attendance.findOne({ employee: employeeId, date: today });
-    if (existingAttendance) return res.status(400).json({ message: "Attendance already marked" });
+    const existingAttendance = await Attendance.findOne({
+      employee: employeeId,
+      date: today,
+    });
+    if (existingAttendance)
+      return res.status(400).json({ message: "Attendance already marked" });
 
     const attendance = new Attendance({
       employee: employeeId,
@@ -53,14 +58,14 @@ exports.markAttendance = async (req, res) => {
     });
 
     await attendance.save();
-    res.status(201).json({ message: "Attendance marked successfully", attendance });
+    res
+      .status(201)
+      .json({ message: "Attendance marked successfully", attendance });
   } catch (error) {
     console.error("Error marking attendance", error);
     res.status(500).json({ message: "Server error" });
   }
 };
-
-
 
 /// ✅ Get employees who have marked attendance today (Present Employees)
 exports.getPresentEmployees = async (req, res) => {
@@ -87,15 +92,58 @@ exports.getPresentEmployees = async (req, res) => {
   }
 };
 
+const autoMarkAbsent = async (employeeId) => {
+  try {
+    const employee = await Employee.findById(employeeId);
+    if (!employee) return;
+
+    const today = moment();
+    const startOfMonth = moment().startOf("month");
+
+    // ✅ Get all attendance records for this month
+    const attendanceRecords = await Attendance.find({
+      employee: employeeId,
+      date: {
+        $gte: startOfMonth.format("YYYY-MM-DD"),
+        $lte: today.format("YYYY-MM-DD"),
+      },
+    });
+
+    const attendedDates = attendanceRecords.map((record) => record.date);
+
+    // ✅ Loop through all days of the month and check for missing dates
+    for (
+      let date = moment(startOfMonth);
+      date.isBefore(today);
+      date.add(1, "days")
+    ) {
+      const formattedDate = date.format("YYYY-MM-DD");
+
+      // ✅ If no attendance record exists for this day, mark as Absent
+      if (!attendedDates.includes(formattedDate)) {
+        await Attendance.create({
+          employee: employeeId,
+          date: formattedDate,
+          status: "Absent",
+        });
+      }
+    }
+  } catch (error) {
+    console.error("❌ Error auto-marking absent:", error.message);
+  }
+};
+
 // ✅ Get attendance details of a specific employee
 exports.getEmployeeAttendanceDetails = async (req, res) => {
   try {
     const { employeeId } = req.params;
-    if (!employeeId) {
+    if (!employeeId)
       return res.status(400).json({ message: "Employee ID is required" });
-    }
 
-    // Fetch all attendance records of the given employee
+    // ✅ Auto-mark Absent for missing days
+    await autoMarkAbsent(employeeId);
+
+    // ✅ Fetch all attendance records
     const attendanceRecords = await Attendance.find({ employee: employeeId })
       .populate({
         path: "employee",
@@ -107,11 +155,13 @@ exports.getEmployeeAttendanceDetails = async (req, res) => {
       })
       .select("date checkInTime checkOutTime status");
 
-    // ✅ Calculate working hours for each record
-    const formattedRecords = attendanceRecords.map(record => {
+    // ✅ Calculate working hours
+    const formattedRecords = attendanceRecords.map((record) => {
       let workingHours = null;
       if (record.checkInTime && record.checkOutTime) {
-        workingHours = (new Date(record.checkOutTime) - new Date(record.checkInTime)) / (1000 * 60 * 60);
+        workingHours =
+          (new Date(record.checkOutTime) - new Date(record.checkInTime)) /
+          (1000 * 60 * 60);
       }
       return {
         ...record._doc,
@@ -120,7 +170,9 @@ exports.getEmployeeAttendanceDetails = async (req, res) => {
     });
 
     if (!attendanceRecords.length) {
-      return res.status(404).json({ message: "No attendance records found for this employee" });
+      return res
+        .status(404)
+        .json({ message: "No attendance records found for this employee" });
     }
 
     res.json(formattedRecords);
@@ -129,7 +181,6 @@ exports.getEmployeeAttendanceDetails = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
 
 // ✅ Get employees eligible for checkout (who haven't checked out yet)
 exports.getCheckoutEmployees = async (req, res) => {
@@ -157,7 +208,7 @@ exports.getCheckoutEmployees = async (req, res) => {
   }
 };
 
-// ✅ Checkout an employee and update status 
+// ✅ Checkout an employee and update status
 exports.checkoutEmployee = async (req, res) => {
   try {
     console.log("📢 Checkout request received:", req.body); // Debug log
@@ -179,7 +230,9 @@ exports.checkoutEmployee = async (req, res) => {
     const today = getToday();
     if (!today) {
       console.error("❌ Error: getToday() function failed");
-      return res.status(500).json({ message: "Server error: Invalid date function" });
+      return res
+        .status(500)
+        .json({ message: "Server error: Invalid date function" });
     }
 
     console.log("🔍 Searching for attendance record...");
@@ -218,7 +271,9 @@ exports.checkoutEmployee = async (req, res) => {
     // ✅ Ensure workingHours is a valid number
     if (isNaN(workingHours)) {
       console.error("❌ Error: Working hours calculation failed");
-      return res.status(500).json({ message: "Server error: Invalid working hours calculation" });
+      return res
+        .status(500)
+        .json({ message: "Server error: Invalid working hours calculation" });
     }
 
     attendanceRecord.workingHours = `${workingHours} hours`;
@@ -253,17 +308,21 @@ exports.checkoutEmployee = async (req, res) => {
   }
 };
 
-
-
 // ✅ Get employees who have NOT checked in today (Absent Employees)
 exports.getAbsentEmployees = async (req, res) => {
   try {
     const today = getToday();
 
-    const presentEmployees = await Attendance.find({ date: today }).select("employee");
-    const presentEmployeeIds = presentEmployees.map(record => record.employee.toString());
+    const presentEmployees = await Attendance.find({ date: today }).select(
+      "employee"
+    );
+    const presentEmployeeIds = presentEmployees.map((record) =>
+      record.employee.toString()
+    );
 
-    const absentEmployees = await Employee.find({ _id: { $nin: presentEmployeeIds } });
+    const absentEmployees = await Employee.find({
+      _id: { $nin: presentEmployeeIds },
+    });
 
     res.json(absentEmployees);
   } catch (error) {

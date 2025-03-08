@@ -8,7 +8,9 @@ exports.applyLeave = async (req, res) => {
   try {
     const { employeeId, employmentDetails, leaveDetails } = req.body;
 
-    if (!employeeId) return res.status(400).json({ message: "Employee ID is required" });
+    if (!employeeId) {
+      return res.status(400).json({ message: "Employee ID is required" });
+    }
 
     const from = moment(leaveDetails.fromDate);
     const to = moment(leaveDetails.toDate);
@@ -17,63 +19,69 @@ exports.applyLeave = async (req, res) => {
     const year = from.year();
     const month = from.month() + 1;
 
-    let leaveRecord = await Leave.findOne({ employee: employeeId, year });
+    // ✅ Fetch the most recent leave record to get available balances
+    const latestLeaveRecord = await Leave.findOne({ employee: employeeId }).sort({ createdAt: -1 });
 
-    if (!leaveRecord) {
-      // ✅ If no record exists for the year, create a new record with default leave balance
-      leaveRecord = new Leave({
-        employee: employeeId,
-        year,
-        month,
-        employmentDetails,
-        leaveDetails,
-        status: "Pending",
-        leaveAvailable: {
-          cl: { opBal: 12, clBal: 12 },
-          ml: { opBal: 6, clBal: 6 },
-          pl: { opBal: 12, clBal: 12 },
-          total: { opBal: 30, clBal: 30 },
-        },
-      });
-    }
+    // ✅ Default leave balance if no previous record exists
+    const defaultLeaveBalance = {
+      cl: { opBal: 12, clBal: 12, less: 0 },
+      ml: { opBal: 6, clBal: 6, less: 0 },
+      pl: { opBal: 12, clBal: 12, less: 0 },
+      total: { opBal: 30, clBal: 30, less: 0 },
+    };
+
+    let availableLeaves = latestLeaveRecord ? { ...latestLeaveRecord.leaveAvailable } : defaultLeaveBalance;
 
     // ✅ Deduct leave from the correct category
     if (leaveDetails.natureOfLeave === "Paid") {
-      if (leaveRecord.leaveAvailable.pl.clBal < days) {
+      if (availableLeaves.pl.clBal < days) {
         return res.status(400).json({ message: "Not enough Paid Leave available" });
       }
-      leaveRecord.leaveAvailable.pl.less += days;
-      leaveRecord.leaveAvailable.pl.clBal -= days;
+      availableLeaves.pl.clBal -= days;
+      availableLeaves.pl.less += days;
     } else if (leaveDetails.natureOfLeave === "Medical") {
-      if (leaveRecord.leaveAvailable.ml.clBal < days) {
+      if (availableLeaves.ml.clBal < days) {
         return res.status(400).json({ message: "Not enough Medical Leave available" });
       }
-      leaveRecord.leaveAvailable.ml.less += days;
-      leaveRecord.leaveAvailable.ml.clBal -= days;
+      availableLeaves.ml.clBal -= days;
+      availableLeaves.ml.less += days;
     } else if (leaveDetails.natureOfLeave === "Casual") {
-      if (leaveRecord.leaveAvailable.cl.clBal < days) {
+      if (availableLeaves.cl.clBal < days) {
         return res.status(400).json({ message: "Not enough Casual Leave available" });
       }
-      leaveRecord.leaveAvailable.cl.less += days;
-      leaveRecord.leaveAvailable.cl.clBal -= days;
+      availableLeaves.cl.clBal -= days;
+      availableLeaves.cl.less += days;
     }
 
-    // ✅ Update Total Leave Balance
-    leaveRecord.leaveAvailable.total.less += days;
-    leaveRecord.leaveAvailable.total.clBal =
-      leaveRecord.leaveAvailable.cl.clBal +
-      leaveRecord.leaveAvailable.ml.clBal +
-      leaveRecord.leaveAvailable.pl.clBal;
+    // ✅ Update total leave balance
+    availableLeaves.total.less += days;
+    availableLeaves.total.clBal = availableLeaves.cl.clBal + availableLeaves.ml.clBal + availableLeaves.pl.clBal;
 
-    await leaveRecord.save();
-    res.status(201).json({ message: "Leave request submitted successfully", leaveRecord });
+    // ✅ Create a new leave record for each request (NO OVERWRITING)
+    const newLeaveRecord = new Leave({
+      employee: employeeId,
+      year,
+      month,
+      employmentDetails,
+      leaveDetails,
+      status: "Pending",
+      leaveAvailable: availableLeaves, // ✅ Store new balances without overwriting old ones
+      createdAt: new Date(), // ✅ Store timestamp for proper history
+    });
+
+    await newLeaveRecord.save();
+
+    res.status(201).json({ message: "Leave request submitted successfully", newLeaveRecord });
   } catch (error) {
     console.error("Error applying for leave:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
 
-// ✅ Get Employee Leave Details
+
+
+
+// ✅ Function to get leave details of an employee
 exports.getEmployeeLeaveDetails = async (req, res) => {
   try {
     const { employeeId } = req.params;
@@ -87,47 +95,29 @@ exports.getEmployeeLeaveDetails = async (req, res) => {
       return res.status(404).json({ message: "Employee not found" });
     }
 
-    // ✅ Get Current Year
-    const currentYear = moment().year();
-
-    // ✅ Check if Leave Record Exists for the Current Year
-    let leaveRecord = await Leave.findOne({
-      employee: employeeId,
-      year: currentYear,
-    });
-
-    // ✅ If no leave record exists for the year, create a new one with default annual leave balance
-    if (!leaveRecord) {
-      leaveRecord = new Leave({
-        employee: employeeId,
-        year: currentYear,
-        month: 1, // Default to January (New Year Start)
-        leaveAvailable: {
-          cl: { opBal: 12, clBal: 12 },
-          ml: { opBal: 6, clBal: 6 },
-          pl: { opBal: 12, clBal: 12 },
-          total: { opBal: 30, clBal: 30 },
-        },
-      });
-
-      await leaveRecord.save();
-    }
-
-    // ✅ Fetch All Leave Records for the Employee
+    // ✅ Fetch All Leave Records for the Employee (Sorted by Most Recent First)
     const leaveRecords = await Leave.find({ employee: employeeId })
-      .sort({ year: -1 })
+      .sort({ createdAt: -1 })
       .lean();
 
-    // ✅ Extract Remaining Leaves
-    const remainingLeaves = {
-      cl: leaveRecord.leaveAvailable.cl.clBal,
-      ml: leaveRecord.leaveAvailable.ml.clBal,
-      pl: leaveRecord.leaveAvailable.pl.clBal,
-      total: leaveRecord.leaveAvailable.total.clBal,
+    // ✅ Initialize default remaining leave balances
+    let leaveAvailable = {
+      cl: { opBal: 12, add: 0, less: 0, clBal: 12 },
+      ml: { opBal: 6, add: 0, less: 0, clBal: 6 },
+      pl: { opBal: 12, add: 0, less: 0, clBal: 12 },
+      total: { opBal: 30, add: 0, less: 0, clBal: 30 },
     };
 
+    let leaveDetails = null; // ✅ New object to store latest leave details
+
+    if (leaveRecords.length > 0) {
+      const latestLeave = leaveRecords[0]; // ✅ Get the most recent leave record
+      leaveAvailable = latestLeave.leaveAvailable;
+      leaveDetails = latestLeave.leaveDetails; // ✅ Store latest leave details
+    }
+
     // ✅ Prepare Response
-    const responseData = {
+    res.json({
       employeeDetails: {
         id: employee._id,
         name: `${employee.firstName} ${employee.lastName}`,
@@ -136,16 +126,19 @@ exports.getEmployeeLeaveDetails = async (req, res) => {
         designation: employee.designation,
         department: employee.department,
       },
-      remainingLeaves,
-      leaveRecords, // ✅ Includes all leave applications
-    };
-
-    res.json(responseData);
+      leaveAvailable, // ✅ Previously returned
+      leaveDetails,   // ✅ NEW: Now frontend gets the latest leave request details
+      leaveHistory: leaveRecords, // ✅ Returns full history
+    });
   } catch (error) {
     console.error("Error fetching employee leave details:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
+
+
+
+
 
 // ✅ Update Leave Status (Approve, Reject, or Pending)
 exports.updateLeaveStatus = async (req, res) => {

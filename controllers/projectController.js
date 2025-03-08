@@ -25,14 +25,17 @@ exports.createProject = async (req, res) => {
 
 
 // Get All Projects
-exports.getProjects = async (req, res) => {
-  try {
-    const projects = await Project.find().populate("members", "firstName lastName email");
-    res.status(200).json(projects);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch projects" });
-  }
-};
+  exports.getProjects = async (req, res) => {
+    try {
+      const projects = await Project.find().populate(
+        "members",
+        "firstName lastName email"
+      );
+      res.status(200).json(projects);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch projects" });
+    }
+  };
 
 // Get Single Project
 exports.getProjectById = async (req, res) => {

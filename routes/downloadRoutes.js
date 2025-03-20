@@ -6,7 +6,6 @@ const Employee = require("../models/Employee");
 const Department = require("../models/Department");
 const Attendance = require("../models/Attendance");
 const Project = require("../models/Project");
-const Leave = require("../models/Leave");
 const Task = require("../models/taskModel");
 const Message = require("../models/Message");
 
@@ -24,7 +23,6 @@ router.get("/download-data", async (req, res) => {
       departments: await Department.find({}),
       attendance: await Attendance.find({}),
       projects: await Project.find({}),
-      leaves: await Leave.find({}),
       tasks: await Task.find({}),
       messages: await Message.find({}),
     };

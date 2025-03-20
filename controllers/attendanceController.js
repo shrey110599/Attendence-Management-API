@@ -1,13 +1,14 @@
 // controllers/attendanceController.js
 const Employee = require("../models/Employee");
 const Attendance = require("../models/Attendance");
-
+const Holiday = require("../models/Holiday");
 // ✅ Helper function: Get today's date at midnight
 const getToday = () => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   return today;
 };
+
 
 // ✅ Get employees who have NOT marked attendance today (Absent Employees)
 exports.getAvailableEmployees = async (req, res) => {
@@ -38,23 +39,29 @@ exports.getAvailableEmployees = async (req, res) => {
 exports.markAttendance = async (req, res) => {
   try {
     const { employeeId } = req.body;
-    if (!employeeId)
-      return res.status(400).json({ message: "Employee ID is required" });
+    if (!employeeId) return res.status(400).json({ message: "Employee ID is required" });
 
-    const today = getToday();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    const existingAttendance = await Attendance.findOne({
-      employee: employeeId,
-      date: today,
-    });
-    if (existingAttendance)
+    // ✅ Check if today is a holiday
+    const holiday = await Holiday.findOne({ date: today });
+    if (holiday) {
+      return res.json({ message: `Today is a holiday: ${holiday.name}`, status: "Holiday" });
+    }
+
+    // ✅ Check if attendance already exists
+    const existingAttendance = await Attendance.findOne({ employee: employeeId, date: today });
+    if (existingAttendance) {
       return res.status(400).json({ message: "Attendance already marked" });
+    }
 
+    // ✅ Mark attendance as "Present"
     const attendance = new Attendance({
       employee: employeeId,
       date: today,
       checkInTime: new Date(),
-      status: "Present", // Default to Present (will update on checkout)
+      status: "Present",
     });
 
     await attendance.save();
@@ -62,7 +69,7 @@ exports.markAttendance = async (req, res) => {
       .status(201)
       .json({ message: "Attendance marked successfully", attendance });
   } catch (error) {
-    console.error("Error marking attendance", error);
+    console.error("Error marking attendance:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -70,80 +77,135 @@ exports.markAttendance = async (req, res) => {
 /// ✅ Get employees who have marked attendance today (Present Employees)
 exports.getPresentEmployees = async (req, res) => {
   try {
-    // Get the date from query parameter or default to today's date
-    const date = req.query.date || getToday(); // Use the provided date or today's date
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    // Get attendance records for the given date and populate employee + department details
-    const presentEmployees = await Attendance.find({ date })
+    // ✅ Check if today is a holiday
+    const holiday = await Holiday.findOne({ date: today });
+    if (holiday) {
+      const employees = await Employee.find().select("firstName lastName email phoneNo Designation Department");
+      return res.json(
+        employees.map((emp) => ({
+          employee: emp,
+          status: "Holiday",
+          message: `Today is a holiday: ${holiday.name}`,
+        }))
+      );
+    }
+
+    // ✅ Fetch employees who marked attendance today
+    const presentEmployees = await Attendance.find({ date: today })
       .populate({
         path: "employee",
         select: "firstName lastName email phoneNo Designation Department",
-        populate: {
-          path: "Department",
-          select: "name description", // Fetch department name and description
-        },
+        populate: { path: "Department", select: "name description" },
       })
-      .select("employee checkInTime");
+      .select("employee checkInTime status");
 
     res.json(presentEmployees);
   } catch (error) {
-    console.error("Error fetching present employees", error);
+    console.error("Error fetching present employees:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
 
-const autoMarkAbsent = async (employeeId) => {
+const autoMarkAbsent = async () => {
   try {
-    const employee = await Employee.findById(employeeId);
-    if (!employee) return;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    const today = moment();
-    const startOfMonth = moment().startOf("month");
-
-    // ✅ Get all attendance records for this month
-    const attendanceRecords = await Attendance.find({
-      employee: employeeId,
-      date: {
-        $gte: startOfMonth.format("YYYY-MM-DD"),
-        $lte: today.format("YYYY-MM-DD"),
-      },
-    });
-
-    const attendedDates = attendanceRecords.map((record) => record.date);
-
-    // ✅ Loop through all days of the month and check for missing dates
-    for (
-      let date = moment(startOfMonth);
-      date.isBefore(today);
-      date.add(1, "days")
-    ) {
-      const formattedDate = date.format("YYYY-MM-DD");
-
-      // ✅ If no attendance record exists for this day, mark as Absent
-      if (!attendedDates.includes(formattedDate)) {
-        await Attendance.create({
-          employee: employeeId,
-          date: formattedDate,
-          status: "Absent",
-        });
-      }
+    // ✅ Check if today is a holiday
+    const holiday = await Holiday.findOne({ date: today });
+    if (holiday) {
+      console.log(`✅ Skipping absence marking: Today is a holiday (${holiday.name})`);
+      return;
     }
+
+    // ✅ Get all employees
+    const allEmployees = await Employee.find().select("_id");
+
+    // ✅ Get employees who have already checked in
+    const presentEmployees = await Attendance.find({ date: today }).select("employee");
+    const presentEmployeeIds = presentEmployees.map((record) => record.employee.toString());
+
+    // ✅ Find employees who haven't checked in
+    const absentEmployees = allEmployees.filter((emp) => !presentEmployeeIds.includes(emp._id.toString()));
+
+    // ✅ Mark absent employees
+    for (let employee of absentEmployees) {
+      await Attendance.create({
+        employee: employee._id,
+        date: today,
+        status: "Absent",
+      });
+    }
+
+    console.log(`✅ Auto-marked ${absentEmployees.length} employees as Absent`);
   } catch (error) {
-    console.error("❌ Error auto-marking absent:", error.message);
+    console.error("❌ Error auto-marking absent:", error);
   }
 };
+
+// ✅ Run every night at 11:59 PM
+setInterval(async () => {
+  const now = new Date();
+  if (now.getHours() === 23 && now.getMinutes() === 59) {
+    await autoMarkAbsent();
+  }
+}, 60000); 
+
+
+const autoMarkHoliday = async () => {
+  try {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // ✅ Check if today is a holiday
+    const holiday = await Holiday.findOne({ date: today });
+    if (!holiday) return; // No holiday today, do nothing
+
+    console.log(`✅ Today (${today.toDateString()}) is a holiday: ${holiday.name}`);
+
+    // ✅ Get all employees
+    const employees = await Employee.find().select("_id");
+
+    // ✅ Check who already has attendance marked
+    const existingRecords = await Attendance.find({ date: today }).select("employee");
+    const markedEmployeeIds = existingRecords.map((record) => record.employee.toString());
+
+    // ✅ Find employees who don't have an attendance record today
+    const employeesToMark = employees.filter((emp) => !markedEmployeeIds.includes(emp._id.toString()));
+
+    // ✅ Create holiday attendance records
+    const holidayAttendances = employeesToMark.map((employee) => ({
+      employee: employee._id,
+      date: today,
+      status: "Holiday",
+    }));
+
+    await Attendance.insertMany(holidayAttendances);
+    console.log(`✅ Marked ${holidayAttendances.length} employees as "Holiday"`);
+  } catch (error) {
+    console.error("❌ Error auto-marking holidays:", error);
+  }
+};
+
+// ✅ Run autoMarkHoliday at 12:00 AM every day
+setInterval(async () => {
+  const now = new Date();
+  if (now.getHours() === 0 && now.getMinutes() === 0) {
+    await autoMarkHoliday();
+  }
+}, 60000);
+
 
 // ✅ Get attendance details of a specific employee
 exports.getEmployeeAttendanceDetails = async (req, res) => {
   try {
     const { employeeId } = req.params;
-    if (!employeeId)
-      return res.status(400).json({ message: "Employee ID is required" });
+    if (!employeeId) return res.status(400).json({ message: "Employee ID is required" });
 
-    // ✅ Auto-mark Absent for missing days
-    await autoMarkAbsent(employeeId);
-
-    // ✅ Fetch all attendance records
+    // Fetch attendance records (including Absent)
     const attendanceRecords = await Attendance.find({ employee: employeeId })
       .populate({
         path: "employee",
@@ -155,25 +217,31 @@ exports.getEmployeeAttendanceDetails = async (req, res) => {
       })
       .select("date checkInTime checkOutTime status");
 
-    // ✅ Calculate working hours
+    if (!attendanceRecords.length) {
+      return res.json([{ status: "Absent", message: "No records found" }]);
+    }
+
+    // ✅ Calculate working hours & adjust status
     const formattedRecords = attendanceRecords.map((record) => {
       let workingHours = null;
+      let updatedStatus = record.status;
+
       if (record.checkInTime && record.checkOutTime) {
         workingHours =
           (new Date(record.checkOutTime) - new Date(record.checkInTime)) /
           (1000 * 60 * 60);
+
+        if (workingHours < 9) {
+          updatedStatus = "Half Day";
+        }
       }
+
       return {
         ...record._doc,
         workingHours: workingHours ? workingHours.toFixed(2) + " hours" : "N/A",
+        status: updatedStatus,
       };
     });
-
-    if (!attendanceRecords.length) {
-      return res
-        .status(404)
-        .json({ message: "No attendance records found for this employee" });
-    }
 
     res.json(formattedRecords);
   } catch (error) {

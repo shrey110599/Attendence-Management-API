@@ -90,6 +90,9 @@ app.use("/projects", projectRoutes);
 // ✅ Leave Management Routes
 app.use("/leaves", require("./routes/leaveRoutes"));
 
+// ✅ Leave balances Routes
+app.use("/leave-balances", require("./routes/leaveBalanceRoutes"));
+
 // ✅ Task Management Routes
 const taskRoutes = require("./routes/taskRoutes");
 app.use("/tasks", taskRoutes);
@@ -101,6 +104,11 @@ app.use("/chat", chatRoutes);
 // ✅ File Download Routes
 const downloadRoutes = require("./routes/downloadRoutes");
 app.use("/download", downloadRoutes);
+
+// / ✅ holidayRoutes  Routes
+const holidayRoutes = require("./routes/holidayRoutes");
+app.use("/holidays", holidayRoutes);
+
 
 // ✅ Default Route
 app.get("/", (req, res) => {

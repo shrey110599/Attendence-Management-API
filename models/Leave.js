@@ -23,8 +23,8 @@ const leaveSchema = new mongoose.Schema({
   leaveDetails: {
     leaveRequested: { type: String, required: true },
     natureOfLeave: {
-      type: String,
-      enum: ["Paid", "Medical", "Casual"],
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "LeaveBalance", // ✅ Proper reference to LeaveBalance
       required: true,
     },
     reasonOfLeave: { type: String, required: true },

@@ -11,7 +11,7 @@ const {
 } = require("../controllers/attendanceController");
 
 // ✅ Get employees who have NOT marked attendance today
-router.get('/employees', getAvailableEmployees);
+router.get("/employees", getAvailableEmployees);
 
 // ✅ Mark attendance (Check-in)
 router.post('/mark', markAttendance);
@@ -20,7 +20,7 @@ router.post('/mark', markAttendance);
 router.get('/present', getPresentEmployees);
 
 // ✅ Get employees eligible for checkout
-router.get('/checkout-list', getCheckoutEmployees);
+router.get("/checkout-list", getCheckoutEmployees);
 
 // ✅ Checkout an employee
 router.post("/checkout", checkoutEmployee);

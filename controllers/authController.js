@@ -81,8 +81,6 @@ const registerUser = async (req, res) => {
 };
 
 
-
-
 // Login User with Activity Logging
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -104,7 +102,7 @@ const loginUser = async (req, res) => {
     } else {
       res.status(401).json({ message: "Invalid credentials" });
     }
-  } catch (error) {
+  } catch (error) { 
     res.status(500).json({ message: "Server error" });
   }
 };

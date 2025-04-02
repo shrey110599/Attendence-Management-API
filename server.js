@@ -42,7 +42,7 @@ app.use(
 
 // ✅ Middleware to parse JSON request body
 app.use(express.json());
-
+app.use("/uploads", express.static("uploads"));
 /*  
 |--------------------------------------------------------------------------
 | ✅ Define API Routes  
@@ -89,7 +89,6 @@ app.use("/projects", projectRoutes);
 
 // ✅ Leave Management Routes
 app.use("/leaves", require("./routes/leaveRoutes"));
-
 // ✅ Leave balances Routes
 app.use("/leave-balances", require("./routes/leaveBalanceRoutes"));
 
@@ -109,6 +108,29 @@ app.use("/download", downloadRoutes);
 const holidayRoutes = require("./routes/holidayRoutes");
 app.use("/holidays", holidayRoutes);
 
+
+// ✅ Visitor Management Routes
+const visitorRoutes = require("./routes/visitorRoutes");
+app.use("/visitors", visitorRoutes);
+
+
+// ✅ Customer Routes
+const customerRoutes = require("./routes/customerRoutes");
+app.use("/api/customers", customerRoutes);
+
+// ✅ Expense Management Routes
+const expenseRoutes = require("./routes/expenseRoutes");
+app.use("/expenses", expenseRoutes);
+
+
+// ✅ contracts Management Routes
+const contractRoutes = require("./routes/contractRoutes");
+app.use("/contracts", contractRoutes);
+
+
+// ✅ Lead Management Routes
+const leadRoutes = require("./routes/leadRoutes");
+app.use("/leads", leadRoutes);
 
 // ✅ Default Route
 app.get("/", (req, res) => {

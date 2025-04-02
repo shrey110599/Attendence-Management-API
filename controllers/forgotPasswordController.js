@@ -15,31 +15,35 @@ const sendOtp = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({ message: "User not found.." });
+      return res.status(404).json({ message: "User not found" });
     }
 
-    // Generate a 6-digit OTP
+    // ✅ Generate a 6-digit OTP
     const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
 
-    // Delete any existing OTP for this email
+    // ✅ Delete any existing OTP for this email
     await Otp.deleteMany({ email });
 
-    // Save OTP in DB with expiry (e.g., 5 minutes)
+    // ✅ Save OTP in DB with expiry (5 minutes)
     await Otp.create({ email, otp: otpCode, createdAt: new Date() });
 
-    // Debugging: Log OTP before sending email
+    // ✅ Debugging: Log OTP before sending email
     console.log(`Generated OTP: ${otpCode} for ${email}`);
 
-    // Send Email
-    await sendEmail(email, "Password Reset OTP", `Your OTP is: ${otpCode}`);
+    // ✅ Send Email with OTP
+    await sendEmail({
+      to: email,
+      subject: "Aark Infosoft - Password Reset OTP",
+      emailType: "password_reset",
+      data: { otp: otpCode },
+    });
 
-    res.json({ message: "OTP sent to your email" });
+    res.json({ success: true, message: "OTP sent to your email" });
   } catch (error) {
     console.error("Error in sendOtp:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
-
 // 2️⃣ Verify OTP
 const verifyOtp = async (req, res) => {
   const { email, otp } = req.body;
